@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Transaction Failed - Starlink Uganda{% endblock %}
+
+{% block content %}
+<div class="flex items-center justify-center min-h-[calc(100vh-200px)]">
+    <div class="w-full max-w-2xl bg-white rounded-2xl card-shadow overflow-hidden border border-gray-100">
+        <!-- Failure Header -->
+        <div class="bg-red-500 p-8 text-center text-white">
+            <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="uil uil-times text-5xl"></i>
+            </div>
+            <h1 class="text-3xl font-bold">Transaction Failed</h1>
+            <p class="text-red-100 mt-2">We were unable to process your payment at this time.</p>
+        </div>
+
+        <!-- Order Details -->
+        <div class="p-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div>
+                    <h3 class="text-gray-500 text-sm uppercase tracking-wider mb-1">Customer</h3>
+                    <p class="text-lg font-bold text-gray-800">{{ order.momo_number }}</p>
+                </div>
+                <div>
+                    <h3 class="text-gray-500 text-sm uppercase tracking-wider mb-1">Order ID</h3>
+                    <p class="text-lg font-bold text-gray-800">#SLS-{{ order.id|stringformat:"05d" }}</p>
+                </div>
+                <div>
+                    <h3 class="text-gray-500 text-sm uppercase tracking-wider mb-1">Data Plan</h3>
+                    <p class="text-lg font-bold text-gray-800">{{ order.package_name }}</p>
+                </div>
+                <div>
+                    <h3 class="text-gray-500 text-sm uppercase tracking-wider mb-1">Amount</h3>
+                    <p class="text-lg font-bold text-gray-800">UGX {{ order.amount }}</p>
+                </div>
+                <div>
+                    <h3 class="text-gray-500 text-sm uppercase tracking-wider mb-1">Starlink Kit ID</h3>
+                    <p class="text-lg font-bold text-gray-800">{{ order.starlink_kit_id }}</p>
+                </div>
+                <div>
+                    <h3 class="text-gray-500 text-sm uppercase tracking-wider mb-1">Status</h3>
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
+                        Failed
+                    </span>
+                </div>
+            </div>
+
+            <div class="bg-orange-50 rounded-xl p-6 border border-orange-100 mb-8">
+                <div class="flex gap-4">
+                    <i class="uil uil-exclamation-triangle text-2xl text-orange-600"></i>
+                    <div>
+                        <h4 class="font-bold text-orange-900">What happened?</h4>
+                        <p class="text-orange-800 text-sm mt-1">The transaction was declined by the provider. Please ensure you have sufficient balance and try again later.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="{% url 'landing_page' %}" class="flex-1 bg-black text-white text-center font-bold py-4 rounded-xl hover:bg-gray-800 transition">
+                    Try Again
+                </a>
+                <a href="{% url 'network_dashboard' %}" class="flex-1 bg-gray-100 text-gray-800 text-center font-bold py-4 rounded-xl hover:bg-gray-200 transition">
+                    Back to Status
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
