@@ -8,8 +8,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'heindnmskdkskmd'
 
 DEBUG = True
-
-ALLOWED_HOSTS = ['*']
+# settings.py
+# This allows Django to serve traffic on your PC and on your live Render link
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'starlinkugandabundles.onrender.com',
+]
 CSRF_ALLOW_ALL_ORIGINS = True
 
 
