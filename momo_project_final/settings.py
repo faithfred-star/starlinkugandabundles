@@ -8,17 +8,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'heindnmskdkskmd'
 
 DEBUG = True
-# settings.py
+
 # This allows Django to serve traffic on your PC and on your live Render link
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     'starlinkugandabundles.onrender.com',
 ]
+
 CSRF_ALLOW_ALL_ORIGINS = True
 
-
-INSTALLED_APPS = [z2
+INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
