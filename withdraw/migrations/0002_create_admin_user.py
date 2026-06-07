@@ -1,22 +1,23 @@
+import os
 from django.db import migrations
 from django.contrib.auth.models import User
 
 def create_admin(apps, schema_editor):
+    # This grabs the password from Render environment settings, or uses 1234 locally
+    admin_password = os.environ.get('ADMIN_PASSWORD', '1234')
+    
     try:
-        # Check if the Admin already exists
         u = User.objects.get(username='Admin')
-        u.set_password('1234')
+        u.set_password(admin_password)
         u.save()
-        print("--- Admin password updated successfully! ---")
+        print(f"--- Admin password updated successfully! ---")
     except User.DoesNotExist:
-        # If the admin was deleted, recreate it safely
-        User.objects.create_superuser('Admin', 'faithfred721@gmail.com', '1234')
-        print("--- Fresh Admin superuser created successfully! ---")
+        User.objects.create_superuser('Admin', 'faithfred721@gmail.com', admin_password)
+        print(f"--- Fresh Admin superuser created successfully! ---")
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        # Change this line to point to your existing tracking file
         ('withdraw', '0002_rename_link_count_starlinkorder_otp_count_and_more'), 
     ]
 
